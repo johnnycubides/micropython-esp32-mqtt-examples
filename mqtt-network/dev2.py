@@ -84,7 +84,7 @@ def main():
             mqtt_client.publish(TOPIC_ADC, str(adc_value))
         # 5. Verificar si se ha recibido datos por UART
         if uart_fpga.any():
-            mqtt_client.publish(TOPIC_UART, str(uart_fpga.read()))
+            mqtt_client.publish(TOPIC_UART, uart_fpga.read().decode("utf-8"))
         # 6. Esperar un tiempo antes de hacer el loop
         time.sleep(0.1)
 
