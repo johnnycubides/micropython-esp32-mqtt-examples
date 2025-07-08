@@ -5,7 +5,7 @@ from machine import Pin, ADC, UART
 
 # NETWORK
 SSID = "luna"
-PASSWORD = "samus.com"
+PASSWORD = "password"
 # MQTT DEFINITIONS
 MQTT_BROKER = "192.168.2.105"
 CLIENT_ID = "dev2"

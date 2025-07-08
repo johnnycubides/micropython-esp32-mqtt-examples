@@ -5,7 +5,7 @@ from machine import Pin, ADC, UART
 
 # NETWORK
 SSID = "luna"
-PASSWORD = "samus.com"
+PASSWORD = "password"
 # MQTT DEFINITIONS
 MQTT_BROKER = "192.168.2.105"
 CLIENT_ID = "dev1"
@@ -15,7 +15,7 @@ TOPIC_UART = CLIENT_ID + "/uart"
 # PERIPHERALS DEFINITIONS
 LED_PIN = 2
 BUTTON_PIN = 0
-ADC_PIN = 0
+ADC_PIN = 32
 TX_PIN = 17
 RX_PIN = 16
 BAUDRATE = 57600  # 9600 57600 115200
@@ -35,9 +35,9 @@ def subscribe_callback(topic, msg):
     # Callback actions
     if topic == TOPIC_LED:
         if msg == "on":
-            led.value(0)
-        elif msg == "off":
             led.value(1)
+        elif msg == "off":
+            led.value(0)
 
 
 def connect_mqtt():
