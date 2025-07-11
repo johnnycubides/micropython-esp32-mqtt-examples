@@ -5,26 +5,26 @@ from machine import Pin, ADC, UART
 
 # NETWORK
 SSID = "luna"
-PASSWORD = "password"
+PASSWORD = "loderunner"
 # MQTT DEFINITIONS
-MQTT_BROKER = "192.168.2.105"
+MQTT_BROKER = "192.168.109.225"
 CLIENT_ID = "dev2"
 TOPIC_LED = CLIENT_ID + "/led"
 TOPIC_ADC = CLIENT_ID + "/adc"
 TOPIC_UART = CLIENT_ID + "/uart"
-# PERIPHERALS DEFINITIONS
+# PERIPHERALS DEFINITIONS FOR ESP32C3 MINI
 LED_PIN = 8
 BUTTON_PIN = 9
 ADC_PIN = 0
-TX_PIN = 16
-RX_PIN = 17
+TX_PIN = 20
+RX_PIN = 21
 BAUDRATE = 57600  # 9600 57600 115200
 
 # Make objects for peripherals
 led = Pin(LED_PIN, Pin.OUT)
 adc = ADC(ADC_PIN)
 user_button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_UP)
-uart_fpga = UART(2, baudrate=BAUDRATE, tx=17, rx=16)
+uart_fpga = UART(1, baudrate=BAUDRATE, tx=TX_PIN, rx=RX_PIN)
 
 
 # Callback mqtt

@@ -5,14 +5,14 @@ from machine import Pin, ADC, UART
 
 # NETWORK
 SSID = "luna"
-PASSWORD = "password"
+PASSWORD = "loderunner"
 # MQTT DEFINITIONS
-MQTT_BROKER = "192.168.2.105"
+MQTT_BROKER = "192.168.109.225"
 CLIENT_ID = "dev1"
 TOPIC_LED = CLIENT_ID + "/led"
 TOPIC_ADC = CLIENT_ID + "/adc"
 TOPIC_UART = CLIENT_ID + "/uart"
-# PERIPHERALS DEFINITIONS
+# PERIPHERALS DEFINITIONS ESP32 WROOM
 LED_PIN = 2
 BUTTON_PIN = 0
 ADC_PIN = 32
@@ -24,7 +24,7 @@ BAUDRATE = 57600  # 9600 57600 115200
 led = Pin(LED_PIN, Pin.OUT)
 adc = ADC(ADC_PIN)
 user_button = Pin(BUTTON_PIN, Pin.IN, Pin.PULL_UP)
-uart_fpga = UART(2, baudrate=BAUDRATE, tx=17, rx=16)
+uart_fpga = UART(2, baudrate=BAUDRATE, tx=TX_PIN, rx=RX_PIN)
 
 
 # Callback mqtt
@@ -84,6 +84,8 @@ def main():
             mqtt_client.publish(TOPIC_ADC, str(adc_value))
         # 5. Verificar si se ha recibido datos por UART
         if uart_fpga.any():
+            buffer = uart_fpga.read().decode("utf-8")  # Para leer cualquier valor
+            if buffer 
             mqtt_client.publish(TOPIC_UART, uart_fpga.read().decode("utf-8"))
         # 6. Esperar un tiempo antes de hacer el loop
         time.sleep(0.1)
