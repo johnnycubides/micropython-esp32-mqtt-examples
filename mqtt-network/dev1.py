@@ -85,8 +85,14 @@ def main():
         # 5. Verificar si se ha recibido datos por UART
         if uart_fpga.any():
             buffer = uart_fpga.read().decode("utf-8")  # Para leer cualquier valor
-            if buffer 
-            mqtt_client.publish(TOPIC_UART, uart_fpga.read().decode("utf-8"))
+            if "adc?" in buffer:  # Si se recibe la orden de lectura adc
+                adc_value = adc.read()
+                print(adc_value)
+                uart_fpga.write(
+                    str(adc_value) + "\n"
+                )  # Se puede enviar el caracter terminador
+            else:  # Si se debe enviar el dato a mqtt
+                mqtt_client.publish(TOPIC_UART, uart_fpga.read().decode("utf-8"))
         # 6. Esperar un tiempo antes de hacer el loop
         time.sleep(0.1)
 
