@@ -92,7 +92,7 @@ def main():
                     str(adc_value) + "\n"
                 )  # Se puede enviar el caracter terminador
             else:  # Si se debe enviar el dato a mqtt
-                mqtt_client.publish(TOPIC_UART, uart_fpga.read().decode("utf-8"))
+                mqtt_client.publish(TOPIC_UART, buffer)
         # 6. Esperar un tiempo antes de hacer el loop
         time.sleep(0.1)
 
